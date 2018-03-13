@@ -1,3 +1,6 @@
+[core]
+  editor = subl -n -w
+
 [user]
-name = Joanne Yeung
-email = jttyeung@gmail.com
+  name = Joanne Yeung
+  email = jttyeung@gmail.com

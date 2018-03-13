@@ -1,5 +1,5 @@
 ok brew
-ok brew brew-cask --from=caskroom/cask
+ok brew-tap caskroom/cask
 ok brew mas
 
 # work

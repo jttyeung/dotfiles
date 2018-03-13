@@ -4,7 +4,6 @@
 
 ok brew git                                   # presence and updatedness of Homebrew git package
 ok directory $HOME/dotfiles                   # presence of the ~/dotfiles directory
-ok github $HOME/dotfiles jttyeung/dotfiles 	  # presence, drift of git repository in ~/dotfiles
 cd $HOME
 for file in $HOME/dotfiles/configs/.[!.]*
 do                                            # for each dotfile in ~/dotfiles/configs,

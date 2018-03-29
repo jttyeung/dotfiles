@@ -1,6 +1,6 @@
 [core]
   editor = subl -n -w
-  excludesfile = /Users/joanne.yeung/dotfiles/configs/.gitignore
+  excludesfile = ~/.global-gitignore
 
 [user]
   name = Joanne Yeung

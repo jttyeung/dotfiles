@@ -1,6 +1,6 @@
 [core]
   editor = subl -n -w
-  excludesfile = ~/.global-gitignore
+  excludesfile = ~/.gitignore_global
 
 [user]
   name = Joanne Yeung

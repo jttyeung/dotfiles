@@ -9,7 +9,6 @@ ok cask slack
 ok cask sourcetree
 ok cask sublime-text
 ok cask vagrant
-ok cask yubiswitch
 
 # security and backups
 ok cask 1password
@@ -25,7 +24,6 @@ ok cask google-chrome
 ok cask signal
 ok cask spectacle
 ok cask spotify
-ok cask utorrent
 ok cask vlc
 
 # appstore

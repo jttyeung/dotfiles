@@ -1,4 +1,3 @@
-
 ########## User configurations ##########
 
 # Add brew install Z
@@ -20,12 +19,12 @@ alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.p
 alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
 
+
 ##################################################
 
-########## Default configurations ##########
 
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/joanne/oh-my-zsh
+
+########## Default configurations ##########
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.

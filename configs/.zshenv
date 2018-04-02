@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/joanne.yeung/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Setup GOPATH
 export GOPATH=$HOME/go

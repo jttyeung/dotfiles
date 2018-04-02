@@ -10,7 +10,7 @@ gclw() {
 }
 
 # Heroku Sudo
-source ~/.heroku/heroku-sudo-shell.bash
+# source ~/.heroku/heroku-sudo-shell.bash
 
 # rbenv
 eval "$(rbenv init -)"
@@ -23,6 +23,9 @@ alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.
 ##################################################
 
 ########## Default configurations ##########
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/joanne/oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -55,6 +58,8 @@ ZSH_THEME="muse"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  golang
+  bundler
 )
 
 source $ZSH/oh-my-zsh.sh

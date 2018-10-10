@@ -18,6 +18,10 @@ eval "$(rbenv init -)"
 alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
+
 
 
 ##################################################
@@ -62,3 +66,9 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Manges Heroku cloud env using Ion
+cloud() {
+  eval "$(ion-client shell)"
+  cloud "$@"
+}

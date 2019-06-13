@@ -5,10 +5,14 @@ ok brew mas
 # work
 ok cask docker
 ok cask iterm2
+ok cask google-cloud-sdk
+ok cask minikube
 ok cask slack
 ok cask sourcetree
 ok cask sublime-text
 ok cask vagrant
+ok cask vagrant-manager
+ok cask virtualbox
 
 # security and backups
 ok cask 1password

@@ -11,6 +11,12 @@ gclw() {
 # Heroku Sudo
 # source ~/.heroku/heroku-sudo-shell.bash
 
+# kubeconfig
+
+# kubebuilder
+export PATH=$PATH:/usr/local/kubebuilder/bin
+
+
 # rbenv
 eval "$(rbenv init -)"
 
@@ -22,6 +28,9 @@ alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.
 export NVM_DIR="$HOME/.nvm"
   . "/usr/local/opt/nvm/nvm.sh"
 
+# Other Aliases
+alias kc="kubectl"
+alias h="heroku"
 
 
 ##################################################

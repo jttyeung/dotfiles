@@ -12,6 +12,7 @@ gclw() {
 # source ~/.heroku/heroku-sudo-shell.bash
 
 # kubeconfig
+export KUBECONFIG=$HOME/.kube/config
 
 # kubebuilder
 export PATH=$PATH:/usr/local/kubebuilder/bin

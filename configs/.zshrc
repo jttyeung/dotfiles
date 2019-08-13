@@ -11,12 +11,17 @@ gclw() {
 # Heroku Sudo
 # source ~/.heroku/heroku-sudo-shell.bash
 
+# Manges Heroku cloud env using Ion
+cloud() {
+  eval "$(ion-client shell)"
+  cloud "$@"
+}
+
 # kubeconfig
 export KUBECONFIG=$HOME/.kube/config
 
 # kubebuilder
 export PATH=$PATH:/usr/local/kubebuilder/bin
-
 
 # rbenv
 eval "$(rbenv init -)"
@@ -24,6 +29,9 @@ eval "$(rbenv init -)"
 # PostgreSQL
 alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+
+# SQLite
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -37,13 +45,19 @@ alias h="heroku"
 ##################################################
 
 
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-########## Default configurations ##########
+########## ZSH Default configurations ##########
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="muse"
+# ZSH_THEME="muse"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -75,11 +89,6 @@ plugins=(
   bundler
 )
 
+source $HOME/.p9k
 source $ZSH/oh-my-zsh.sh
-
-# Manges Heroku cloud env using Ion
-cloud() {
-  eval "$(ion-client shell)"
-  cloud "$@"
-}
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

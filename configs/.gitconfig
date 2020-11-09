@@ -5,3 +5,8 @@
 [user]
   name = Joanne Yeung
   email = jttyeung@gmail.com
+[pull]
+	ff = only
+	merge = only
+[url "git@github.com:"]
+	insteadOf = https://github.com/

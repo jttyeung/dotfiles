@@ -23,6 +23,9 @@ export KUBECONFIG=$HOME/.kube/config
 # kubebuilder
 export PATH=$PATH:/usr/local/kubebuilder/bin
 
+# Kubernetes kubectl plugins with krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # rbenv
 eval "$(rbenv init -)"
 
@@ -36,6 +39,19 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 # NVM
 export NVM_DIR="$HOME/.nvm"
   . "/usr/local/opt/nvm/nvm.sh"
+
+# for .nvmrc
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    nvm use
+  elif [[ $(nvm version) != $(nvm version default)  ]]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 # Other Aliases
 alias kc="kubectl"
@@ -87,8 +103,12 @@ plugins=(
   git
   golang
   bundler
+  httpie
 )
 
 source $HOME/.p9k
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# added by travis gem
+[ -f /Users/joanne.yeung/.travis/travis.sh ] && source /Users/joanne.yeung/.travis/travis.sh

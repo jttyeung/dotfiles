@@ -1,3 +1,7 @@
+########## API Tokens ##########
+source ~/API_Tokens/circle-ci-token
+
+
 ########## User configurations ##########
 
 # Add brew install Z

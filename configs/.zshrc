@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ########## API Tokens ##########
 source ~/API_Tokens/circle-ci-token
 
@@ -5,7 +12,7 @@ source ~/API_Tokens/circle-ci-token
 ########## User configurations ##########
 
 # Add brew install Z
-. `brew --prefix`/etc/profile.d/z.sh
+. $(brew --prefix)/etc/profile.d/z.sh
 
 # Git Clone for Heroku; Automagically Place into $GOPATH
 gclw() {
@@ -73,11 +80,14 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 ########## ZSH Default configurations ##########
 
+ZSH_DISABLE_COMPFIX=true
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="muse"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -110,9 +120,12 @@ plugins=(
   httpie
 )
 
-source $HOME/.p9k
+source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # added by travis gem
 [ -f /Users/joanne.yeung/.travis/travis.sh ] && source /Users/joanne.yeung/.travis/travis.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

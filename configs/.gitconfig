@@ -8,5 +8,7 @@
 [pull]
 	ff = only
 	merge = only
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+[hub]
+	protocol = https
+[init]
+	defaultBranch = main

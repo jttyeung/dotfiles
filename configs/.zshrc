@@ -28,6 +28,9 @@ cloud() {
   cloud "$@"
 }
 
+# for github private
+export GOPRIVATE=github.com/heroku
+
 # kubeconfig
 export KUBECONFIG=$HOME/.kube/config
 
@@ -63,6 +66,10 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+# Python3
+alias python=python3
+export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 
 # Other Aliases
 alias kc="kubectl"

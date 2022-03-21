@@ -10,6 +10,7 @@ ok brew kubectx
 ok brew kubernetes-cli
 ok brew libyubikey
 ok brew postgresql
+ok brew the_silver_searcher
 ok brew tmate
 ok brew tmux
 ok brew z

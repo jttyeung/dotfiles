@@ -74,6 +74,7 @@ export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 # Other Aliases
 alias kc="kubectl"
 alias h="heroku"
+alias upterm-up="upterm host --server ssh://upterm.herokai.com:22 --force-command 'tmux attach -t pair-programming' -- tmux new -t pair-programming"
 
 
 ##################################################

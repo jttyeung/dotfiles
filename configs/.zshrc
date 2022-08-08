@@ -137,3 +137,4 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH=/Library/Frameworks/Python.framework/Versions/3.10/bin:/Users/joanne.yeung/.nvm/versions/node/v13.11.0/bin:/usr/local/opt/sqlite/bin:/Users/joanne.yeung/.rbenv/shims:/Users/joanne.yeung/.krew/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/Users/joanne.yeung/go/bin:/usr/local/bin/:/usr/local/kubebuilder/bin:~/nand2tetris/tools

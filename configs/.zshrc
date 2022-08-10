@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-########## API Tokens ##########
-source ~/API_Tokens/circle-ci-token
-
 
 ########## User configurations ##########
 
@@ -72,7 +69,7 @@ alias python=python3
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 
 # Other Aliases
-alias kc="kubectl"
+alias k="kubectl"
 alias h="heroku"
 alias upterm-up="upterm host --server ssh://upterm.herokai.com:22 --force-command 'tmux attach -t pair-programming' -- tmux new -t pair-programming"
 
@@ -132,9 +129,7 @@ source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# added by travis gem
-[ -f /Users/joanne.yeung/.travis/travis.sh ] && source /Users/joanne.yeung/.travis/travis.sh
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 export PATH=/Library/Frameworks/Python.framework/Versions/3.10/bin:/Users/joanne.yeung/.nvm/versions/node/v13.11.0/bin:/usr/local/opt/sqlite/bin:/Users/joanne.yeung/.rbenv/shims:/Users/joanne.yeung/.krew/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/Users/joanne.yeung/go/bin:/usr/local/bin/:/usr/local/kubebuilder/bin:~/nand2tetris/tools

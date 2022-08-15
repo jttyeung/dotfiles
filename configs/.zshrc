@@ -25,6 +25,9 @@ cloud() {
   cloud "$@"
 }
 
+# for ruby
+export GEM_HOME="$HOME/.gem"
+
 # for github private
 export GOPRIVATE=github.com/heroku
 
@@ -72,7 +75,6 @@ export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 alias k="kubectl"
 alias h="heroku"
 alias upterm-up="upterm host --server ssh://upterm.herokai.com:22 --force-command 'tmux attach -t pair-programming' -- tmux new -t pair-programming"
-
 
 ##################################################
 
@@ -133,3 +135,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH=/Library/Frameworks/Python.framework/Versions/3.10/bin:/Users/joanne.yeung/.nvm/versions/node/v13.11.0/bin:/usr/local/opt/sqlite/bin:/Users/joanne.yeung/.rbenv/shims:/Users/joanne.yeung/.krew/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/Users/joanne.yeung/go/bin:/usr/local/bin/:/usr/local/kubebuilder/bin:~/nand2tetris/tools
+
+# use asdf
+. /usr/local/opt/asdf/libexec/asdf.sh

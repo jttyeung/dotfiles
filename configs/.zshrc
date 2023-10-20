@@ -11,22 +11,9 @@ fi
 # Add brew install Z
 . $(brew --prefix)/etc/profile.d/z.sh
 
-# Git Clone for Heroku; Automagically Place into $GOPATH
-gclw() {
-  git clone "git@github.com:heroku/$1.git" $(go env GOPATH)/src/github.com/heroku/"$1" && cd $(go env GOPATH)/src/github.com/heroku/"$1"
-}
-
-# Heroku Sudo
-# source ~/.heroku/heroku-sudo-shell.bash
-
-# Manges Heroku cloud env using Ion
-cloud() {
-  eval "$(ion-client shell)"
-  cloud "$@"
-}
-
 # for ruby
-export GEM_HOME="$HOME/.gem"
+# export GEM_HOME="$HOME/.gem"
+export PATH=$PATH:/Users/joanne.yeung/.gem/bin
 
 # for github private
 export GOPRIVATE=github.com/heroku
@@ -40,9 +27,6 @@ export PATH=$PATH:/usr/local/kubebuilder/bin
 # Kubernetes kubectl plugins with krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# rbenv
-eval "$(rbenv init -)"
-
 # PostgreSQL
 alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
@@ -50,22 +34,22 @@ alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.
 # SQLite
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
+# # NVM
+# export NVM_DIR="$HOME/.nvm"
+#   . "/usr/local/opt/nvm/nvm.sh"
 
-# for .nvmrc
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if [[ -f .nvmrc && -r .nvmrc ]]; then
-    nvm use
-  elif [[ $(nvm version) != $(nvm version default)  ]]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# # for .nvmrc
+# autoload -U add-zsh-hook
+# load-nvmrc() {
+#   if [[ -f .nvmrc && -r .nvmrc ]]; then
+#     nvm use
+#   elif [[ $(nvm version) != $(nvm version default)  ]]; then
+#     echo "Reverting to nvm default version"
+#     nvm use default
+#   fi
+# }
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
 
 # Python3
 alias python=python3
@@ -130,11 +114,10 @@ plugins=(
 source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/dotfiles/configs/.salesforce
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export PATH=/Library/Frameworks/Python.framework/Versions/3.10/bin:/Users/joanne.yeung/.nvm/versions/node/v13.11.0/bin:/usr/local/opt/sqlite/bin:/Users/joanne.yeung/.rbenv/shims:/Users/joanne.yeung/.krew/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/Users/joanne.yeung/go/bin:/usr/local/bin/:/usr/local/kubebuilder/bin:~/nand2tetris/tools
 
 # use asdf
 . /usr/local/opt/asdf/libexec/asdf.sh

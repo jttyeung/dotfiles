@@ -120,3 +120,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # use asdf
 . /usr/local/opt/asdf/libexec/asdf.sh
+
+# use pack completion
+. $(pack completion --shell zsh)

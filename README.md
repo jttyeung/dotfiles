@@ -1,9 +1,12 @@
-# Dev environment setup using [bork](https://github.com/mattly/bork)
+# What this is
+We have a set of tools, languages, and software we often setup by default on our machines. Whenever one reimages or gets a new machine, it's a pain to re-setup and can be quite time consuming. This repo is my personal dev environment setup using [bork](https://github.com/mattly/bork).
 
-~ inspired by [@jsillivan](https://github.com/jsullivan/dotfiles)
+See the [bork repo](https://github.com/mattly/bork) for more on usage beyond the example here.
+
+~ Inspired by [@jsillivan](https://github.com/jsullivan/dotfiles)
 
 
-# Usage
+# Usage instructions for this repo
 1. Install [Homebrew](https://brew.sh/):
 
 	`$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`

@@ -121,3 +121,6 @@ source $HOME/dotfiles/configs/.salesforce
 
 # use asdf
 . /usr/local/opt/asdf/libexec/asdf.sh
+
+# use pack completion
+. $(pack completion --shell zsh)

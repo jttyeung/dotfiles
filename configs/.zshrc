@@ -11,51 +11,10 @@ fi
 # Add brew install Z
 . $(brew --prefix)/etc/profile.d/z.sh
 
-# for ruby
-# export GEM_HOME="$HOME/.gem"
-export PATH=$PATH:/Users/joanne.yeung/.gem/bin
-
-# for github private
-export GOPRIVATE=github.com/heroku
-
-# kubeconfig
-export KUBECONFIG=$HOME/.kube/config
-
-# kubebuilder
-export PATH=$PATH:/usr/local/kubebuilder/bin
-
-# Kubernetes kubectl plugins with krew
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-# PostgreSQL
+# Aliases
 alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-
-# SQLite
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-
-# # NVM
-# export NVM_DIR="$HOME/.nvm"
-#   . "/usr/local/opt/nvm/nvm.sh"
-
-# # for .nvmrc
-# autoload -U add-zsh-hook
-# load-nvmrc() {
-#   if [[ -f .nvmrc && -r .nvmrc ]]; then
-#     nvm use
-#   elif [[ $(nvm version) != $(nvm version default)  ]]; then
-#     echo "Reverting to nvm default version"
-#     nvm use default
-#   fi
-# }
-# add-zsh-hook chpwd load-nvmrc
-# load-nvmrc
-
-# Python3
 alias python=python3
-export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
-
-# Other Aliases
 alias k="kubectl"
 alias h="heroku"
 alias upterm-up="upterm host --server ssh://upterm.herokai.com:22 --force-command 'tmux attach -t pair-programming' -- tmux new -t pair-programming"

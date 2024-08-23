@@ -5,7 +5,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
+##################################################
+
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
 ########## User configurations ##########
 
 # Add brew install Z
@@ -15,12 +25,10 @@ fi
 alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias python=python3
-alias k="kubectl"
 alias h="heroku"
 alias upterm-up="upterm host --server ssh://upterm.herokai.com:22 --force-command 'tmux attach -t pair-programming' -- tmux new -t pair-programming"
 
 ##################################################
-
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
@@ -36,6 +44,7 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="muse"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 
@@ -70,19 +79,12 @@ plugins=(
   httpie
 )
 
-source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/dotfiles/configs/.salesforce
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# use asdf
-. /usr/local/opt/asdf/libexec/asdf.sh
-
-# use pack completion
-. $(pack completion --shell zsh)
 
 # Git clone shortcut; Automagically Place into $GOPATH
 # takes the $GITHUB_ORG/$REPO_NAME as the argument

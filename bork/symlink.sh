@@ -1,8 +1,7 @@
 # Ensure all dotfiles are symlinked
 # Run this with bork from your home dir like so:
-# `bork satisfy ~/dotfiles/install/symlink.sh`
+# `bork satisfy ~/dotfiles/bork/symlink.sh`
 
-ok brew git                                   # presence and updatedness of Homebrew git package
 ok directory $HOME/dotfiles                   # presence of the ~/dotfiles directory
 cd $HOME
 for file in $HOME/dotfiles/configs/.[!.]*

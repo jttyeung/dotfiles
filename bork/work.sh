@@ -2,7 +2,6 @@ ok brew
 
 # apps
 ok cask git-credential-manager-core
-ok cask docker
 
 # tools
 ok brew awscli

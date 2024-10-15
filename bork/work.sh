@@ -18,7 +18,7 @@ ok brew libyubikey
 ok brew-tap microsoft/git
 ok brew postgresql
 ok brew redis
-ok brew terraform
+ok brew-tap hashicorp/tap
 ok brew terraform-docs
 ok brew yq
 

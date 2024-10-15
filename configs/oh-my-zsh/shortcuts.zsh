@@ -3,3 +3,8 @@
 gclw() {
   git clone "git@github.com:$1.git" $(go env GOPATH)/src/github.com/"$1" && cd $(go env GOPATH)/src/github.com/"$1"
 }
+
+cloud() {
+  eval "$(ion-client shell)"
+  cloud "$@"
+}

@@ -8,3 +8,7 @@ cloud() {
   eval "$(ion-client shell)"
   cloud "$@"
 }
+
+pg-restart() {
+  brew services restart postgresql
+}

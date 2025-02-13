@@ -1,7 +1,7 @@
 ok brew
 
 ok brew asdf
-ok brew fzf
+ok brew atuin
 ok brew git
 ok brew jq
 ok brew powerlevel10k

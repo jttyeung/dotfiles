@@ -127,3 +127,4 @@ eval "$(atuin init zsh)"
 
 
 . "$HOME/.local/bin/env"
+. $(brew --prefix asdf)/libexec/asdf.sh

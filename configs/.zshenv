@@ -32,3 +32,6 @@ export GOPRIVATE=github.com/heroku
 
 # kubeconfig
 export KUBECONFIG=$HOME/.kube/config
+
+# adsf shims
+export PATH=$PATH:$HOME/.asdf/shims

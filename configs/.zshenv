@@ -35,3 +35,17 @@ export KUBECONFIG=$HOME/.kube/config
 
 # adsf shims
 export PATH=$PATH:$HOME/.asdf/shims
+
+# proto
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+
+# Homebrew curl
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+# Holodeck SSL certificates
+export HOLODECK_SSL_CERT_PATH="/Users/joanne.yeung/holodeck-localhost.pem"
+export HOLODECK_SSL_KEY_PATH="/Users/joanne.yeung/holodeck-localhost-key.pem"
+
+# Claude Code CA certificates
+export NODE_EXTRA_CA_CERTS="/Users/joanne.yeung/.claude/certs/salesforce-ca-bundle.pem"

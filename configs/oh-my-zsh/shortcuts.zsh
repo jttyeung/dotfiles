@@ -12,3 +12,8 @@ cloud() {
 pg-restart() {
   brew services restart postgresql
 }
+
+claude() {
+    export CLAUDE_CODE_USE_BEDROCK=1
+    command claude "$@"
+}

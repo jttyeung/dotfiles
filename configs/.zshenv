@@ -35,3 +35,13 @@ export KUBECONFIG=$HOME/.kube/config
 
 # adsf shims
 export PATH=$PATH:$HOME/.asdf/shims
+
+# proto
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+
+# Homebrew curl
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+
+# Claude Code CA certificates

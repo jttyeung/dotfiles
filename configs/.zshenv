@@ -32,3 +32,6 @@ export GOPRIVATE=github.com/heroku
 
 # kubeconfig
 export KUBECONFIG=$HOME/.kube/config
+
+# Mise
+export PATH="$HOME/.local/share/mise/shims:$PATH"

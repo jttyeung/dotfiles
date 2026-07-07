@@ -1,5 +1,6 @@
 ok brew
 
+ok brew bat
 ok brew fzf
 ok brew git
 ok brew jq

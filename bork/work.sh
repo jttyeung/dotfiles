@@ -12,6 +12,7 @@ ok brew grip
 ok brew-tap heroku/brew
 ok brew heroku
 ok brew httpie
+ok brew just
 ok brew kubectx
 ok brew kubernetes-cli
 ok brew libyubikey

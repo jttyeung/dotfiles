@@ -14,11 +14,5 @@
 	defaultBranch = main
 [credential]
 	helper = osxkeychain
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
-[credential "https://git.heroku.com"]
-	provider = generic
-[credential "https://git.soma.salesforce.com"]
-	provider = github

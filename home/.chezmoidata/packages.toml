@@ -26,23 +26,14 @@ casks = [
 
 # Only installed when the "work" flag is true (see .chezmoi.toml.tmpl).
 [packages.work]
-taps = [
-    "heroku/brew",
-    "microsoft/git",
-]
 brews = [
     "awscli",
     "buildpacks/tap/pack",
     "git-secrets",
-    "grip",
-    "heroku",
     "httpie",
     "kubectx",
     "kubernetes-cli",
-    "libyubikey",
-    "redis",
 ]
 casks = [
     "docker",
-    "git-credential-manager-core",
 ]

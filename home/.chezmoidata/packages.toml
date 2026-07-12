@@ -12,7 +12,7 @@ brews = [
     "mise",
     "powerlevel10k",
     "tmux",
-    "z",
+    "zoxide",
     "zsh-completions",
     "zsh-syntax-highlighting",
 ]

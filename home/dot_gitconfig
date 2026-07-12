@@ -1,6 +1,7 @@
 [core]
   editor = code --wait
   excludesfile = ~/.gitignore_global
+  hooksPath = ~/.config/git/hooks
 
 [user]
   name = Joanne Yeung

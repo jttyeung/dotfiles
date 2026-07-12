@@ -1,0 +1,9 @@
+#!/bin/sh
+# Global pre-commit hook, wired up via core.hooksPath in ~/.gitconfig.
+# Applies to every repo automatically -- no per-repo setup needed.
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  exit 0
+fi
+
+gitleaks protect --staged --redact -v

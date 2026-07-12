@@ -5,7 +5,6 @@
 [packages.base]
 brews = [
     "bat",
-    "chezmoi",
     "fzf",
     "git",
     "jq",

@@ -18,8 +18,8 @@ then
 fi
 ########## User configurations ##########
 
-# Add brew install Z
-. $(brew --prefix)/etc/profile.d/z.sh
+# zoxide (z / zi)
+eval "$(zoxide init zsh)"
 
 ########## ZSH Default configurations ##########
 

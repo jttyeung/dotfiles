@@ -1,49 +1,48 @@
 # What is this?
-We have a set of tools, languages, and software we often setup by default on our machines. Whenever one reimages or gets a new machine, it's a pain to re-setup and can be quite time consuming. This repo contains configuration files of my personal dev environment setup using [bork](https://github.com/borksh/bork). It makes life just a little less difficult when I need to start over.
+We have a set of tools, languages, and software we often setup by default on our machines. Whenever one reimages or gets a new machine, it's a pain to re-setup and can be quite time consuming. This repo contains configuration files of my personal dev environment setup, managed with [chezmoi](https://www.chezmoi.io/). It makes life just a little less difficult when I need to start over.
 
-See the [bork repo](https://github.com/borksh/bork) for more on usage beyond the example here.
-~ Inspired by [@jsillivan](https://github.com/jsullivan/dotfiles)
+# Layout
+- [.chezmoiroot](.chezmoiroot) points chezmoi at [home/](home/), so repo-level files like this README stay out of `$HOME`.
+- `home/dot_*` files map to `~/.*` (e.g. `home/dot_zshrc` → `~/.zshrc`).
+- [home/.chezmoidata/packages.toml](home/.chezmoidata/packages.toml) lists Homebrew formulae/casks. `run_onchange_darwin-install-packages.sh.tmpl` runs `brew bundle` against it whenever the list changes.
+- [home/dot_config/mise/config.toml](home/dot_config/mise/config.toml) is the global mise tool list; `run_onchange_after_mise-install.sh.tmpl` reruns `mise install` when it changes.
+- Work-only packages are gated by the `work` flag, prompted once on `chezmoi init`.
 
-
-# Instructions
+# Setting up a new machine
 1. Install [Homebrew](https://brew.sh/)
 
 	```sh
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 	```
 
-1. Install [bork](https://github.com/borksh/bork)
+1. Install chezmoi
 
 	```sh
-	brew install bork
+	brew install chezmoi
 	```
 
-1. Install github cli
+1. Clone this repo into `$HOME` and initialize
 
 	```sh
-	brew install gh
+	git clone https://github.com/jttyeung/dotfiles.git ~/dotfiles
+	chezmoi init --source ~/dotfiles
 	```
 
-1. Clone this repo in $HOME
+	You'll be asked once whether this is a work machine.
+
+1. Preview, then apply
 
 	```sh
-	cd $HOME && gh repo clone jttyeung/dotfiles
+	chezmoi diff
+	chezmoi apply
 	```
 
-1. Create an executable of the install script
+# Day-to-day
+```sh
+chezmoi edit ~/.zshrc     # edit the source copy
+chezmoi diff              # see what would change
+chezmoi apply             # write changes to $HOME
+chezmoi cd                # drop into ~/dotfiles to commit/push
+```
 
-	```sh
-	chmod +x ~/dotfiles/install.sh
-	```
-
-1. Run the executable
-
-	```sh
-	~/dotfiles/install.sh
-	```
-
-1. Create the symlinks to $HOME
-
-	```sh
-	bork satisfy ~/dotfiles/bork/symlink.sh
-	```
+Unlike the old bork setup, files in `$HOME` are real files, not symlinks — edit via `chezmoi edit` (or edit in the repo) and run `chezmoi apply`.

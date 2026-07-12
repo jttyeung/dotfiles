@@ -1,0 +1,6 @@
+{{- $work := promptBoolOnce . "work" "Is this a work machine" -}}
+
+sourceDir = {{ .chezmoi.workingTree | quote }}
+
+[data]
+    work = {{ $work }}

@@ -7,9 +7,6 @@
   email = jttyeung@gmail.com
 [pull]
 	ff = only
-	merge = only
-[hub]
-	protocol = https
 [init]
 	defaultBranch = main
 [credential]

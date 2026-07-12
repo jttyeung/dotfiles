@@ -32,7 +32,6 @@ brews = [
     "git-secrets",
     "httpie",
     "kubectx",
-    "kubernetes-cli",
 ]
 casks = [
     "docker",

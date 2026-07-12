@@ -2,7 +2,7 @@ ok brew
 
 ok brew bat
 ok brew chezmoi
-ok brew fzf
+ok brew asdf
 ok brew git
 ok brew jq
 ok brew mise

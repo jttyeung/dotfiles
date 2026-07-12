@@ -1,24 +1,16 @@
 [core]
   editor = code --wait
   excludesfile = ~/.gitignore_global
+  hooksPath = ~/.config/git/hooks
 
 [user]
   name = Joanne Yeung
   email = jttyeung@gmail.com
 [pull]
 	ff = only
-	merge = only
-[hub]
-	protocol = https
 [init]
 	defaultBranch = main
 [credential]
 	helper = osxkeychain
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
-[credential "https://git.heroku.com"]
-	provider = generic
-[credential "https://git.soma.salesforce.com"]
-	provider = github

@@ -1,0 +1,31 @@
+#!/bin/bash
+# Installs Homebrew packages from .chezmoidata/packages.toml.
+# The package lists are rendered into this script, so any change to them
+# changes the script's content and re-triggers it on `chezmoi apply`.
+
+set -eufo pipefail
+
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Homebrew not found; install it first: https://brew.sh" >&2
+    exit 1
+fi
+
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.base.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.base.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+{{ if .work -}}
+{{ range .packages.work.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.work.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.work.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+{{ end -}}
+EOF

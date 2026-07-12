@@ -1,0 +1,38 @@
+# Homebrew packages installed by run_onchange_darwin-install-packages.sh.tmpl.
+# Editing this file (or the script template) triggers a reinstall pass on the
+# next `chezmoi apply`.
+
+[packages.base]
+brews = [
+    "bat",
+    "fzf",
+    "git",
+    "jq",
+    "just",
+    "mise",
+    "powerlevel10k",
+    "tmux",
+    "zoxide",
+    "zsh-completions",
+    "zsh-syntax-highlighting",
+]
+casks = [
+    "claude-code",
+    "dropbox",
+    "iterm2",
+    "spotify",
+    "visual-studio-code",
+]
+
+# Only installed when the "work" flag is true (see .chezmoi.toml.tmpl).
+[packages.work]
+brews = [
+    "awscli",
+    "buildpacks/tap/pack",
+    "gitleaks",
+    "httpie",
+    "kubectx",
+]
+casks = [
+    "docker",
+]

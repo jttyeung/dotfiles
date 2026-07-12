@@ -1,0 +1,11 @@
+#!/bin/bash
+# Re-syncs mise tools whenever the global mise config changes.
+# mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+
+set -eufo pipefail
+
+if command -v mise >/dev/null 2>&1; then
+    mise install
+else
+    echo "mise not found; skipping tool install" >&2
+fi

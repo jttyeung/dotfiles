@@ -2,8 +2,14 @@
 # Global pre-commit hook, wired up via core.hooksPath in ~/.gitconfig.
 # Applies to every repo automatically -- no per-repo setup needed.
 
-if ! command -v gitleaks >/dev/null 2>&1; then
-  exit 0
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --redact -v || exit 1
 fi
 
-gitleaks protect --staged --redact -v
+# core.hooksPath overrides git's normal .git/hooks lookup, so a repo's own
+# pre-commit hook (husky v4, `pre-commit install`, a hand-rolled script)
+# would otherwise be silently skipped. Chain to it here if one exists.
+local_hook="$(git rev-parse --git-dir)/hooks/pre-commit"
+if [ -x "$local_hook" ]; then
+  exec "$local_hook" "$@"
+fi

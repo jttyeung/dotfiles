@@ -17,6 +17,7 @@ brews = [
     "zsh-syntax-highlighting",
 ]
 casks = [
+    "caffeine",
     "claude-code",
     "dropbox",
     "iterm2",

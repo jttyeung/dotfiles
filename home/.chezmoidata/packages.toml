@@ -21,6 +21,7 @@ casks = [
     "dropbox",
     "iterm2",
     "spotify",
+    "tailscale",
     "visual-studio-code",
 ]
 

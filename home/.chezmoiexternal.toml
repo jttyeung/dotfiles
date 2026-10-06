@@ -1,0 +1,7 @@
+# Install Oh My Zsh alongside the custom files managed in dot_oh-my-zsh/.
+[".oh-my-zsh"]
+type = "archive"
+url = "https://github.com/ohmyzsh/ohmyzsh/archive/refs/heads/master.tar.gz"
+stripComponents = 1
+exact = false
+refreshPeriod = "168h"

@@ -19,6 +19,7 @@ brews = [
 casks = [
     "claude-code",
     "dropbox",
+    "font-meslo-for-powerlevel10k",
     "iterm2",
     "spotify",
     "visual-studio-code",

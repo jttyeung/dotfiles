@@ -1,0 +1,21 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# Reapply when the managed profile changes.
+# Profile hash: {{ include "Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl" | sha256sum }}
+
+set -euo pipefail
+
+# iTerm caches preferences while running and may overwrite external changes.
+if /usr/bin/pgrep -x iTerm2 >/dev/null; then
+    echo "Quit iTerm2, then rerun chezmoi apply from VS Code or Terminal to set the default profile." >&2
+    exit 1
+else
+    process_status=$?
+    if [[ "$process_status" -ne 1 ]]; then
+        echo "Could not check whether iTerm2 is running; leaving its default profile unchanged." >&2
+        exit "$process_status"
+    fi
+fi
+
+/usr/bin/defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "E73CBE6B-F933-49D1-830D-43BA72A72031"
+{{ end -}}

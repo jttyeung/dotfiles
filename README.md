@@ -4,8 +4,10 @@ We have a set of tools, languages, and software we often setup by default on our
 # Layout
 - [.chezmoiroot](.chezmoiroot) points chezmoi at [home/](home/), so repo-level files like this README stay out of `$HOME`.
 - `home/dot_*` files map to `~/.*` (e.g. `home/dot_zshrc` → `~/.zshrc`).
+- [home/.chezmoiexternal.toml](home/.chezmoiexternal.toml) installs Oh My Zsh into `~/.oh-my-zsh`, alongside the custom aliases and shortcuts. Powerlevel10k is installed and loaded separately through Homebrew.
 - [home/.chezmoidata/packages.toml](home/.chezmoidata/packages.toml) lists Homebrew formulae/casks. `run_onchange_darwin-install-packages.sh.tmpl` runs `brew bundle` against it whenever the list changes.
 - [home/dot_config/mise/config.toml](home/dot_config/mise/config.toml) is the global mise tool list; `run_onchange_after_mise-install.sh.tmpl` reruns `mise install` when it changes.
+- [home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl](<home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl>) defines the macOS iTerm2 `Dotfiles` profile; `run_onchange_after_darwin-configure-iterm.sh.tmpl` makes it the default.
 - Work-only packages are gated by the `work` flag, prompted once on `chezmoi init`.
 
 # Setting up a new machine
@@ -36,6 +38,17 @@ We have a set of tools, languages, and software we often setup by default on our
 	chezmoi diff
 	chezmoi apply
 	```
+
+	Quit iTerm2 before applying, and run the commands from VS Code's terminal or macOS Terminal. This also downloads Oh My Zsh and sets iTerm2's default profile; no separate installer is needed. Reopen iTerm2 after applying.
+
+1. Select the prompt font
+
+	The package list installs `MesloLGS NF`, which provides Powerlevel10k's icons:
+
+	- **VS Code:** set `terminal.integrated.fontFamily` to `MesloLGS NF` in User Settings.
+	- **iTerm2:** chezmoi installs the `Dotfiles` dynamic profile with `MesloLGS NF` at size 12 and makes it the default automatically. It inherits other settings from the existing `Default` profile. To change the managed font or size, edit the JSON template in this repo and apply with iTerm2 closed.
+
+	Restart the terminal app after installing the font. Existing iTerm2 sessions may retain their previous profile; open a new window with the `Dotfiles` profile if needed. Boxes in the prompt indicate missing font glyphs.
 
 # Day-to-day
 ```sh

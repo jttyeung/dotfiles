@@ -8,6 +8,7 @@ We have a set of tools, languages, and software we often setup by default on our
 - [home/.chezmoidata/packages.toml](home/.chezmoidata/packages.toml) lists Homebrew formulae/casks. `run_onchange_darwin-install-packages.sh.tmpl` runs `brew bundle` against it whenever the list changes.
 - [home/dot_config/mise/config.toml](home/dot_config/mise/config.toml) is the global mise tool list; `run_onchange_after_mise-install.sh.tmpl` reruns `mise install` when it changes.
 - [home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl](<home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl>) defines the macOS iTerm2 `Dotfiles` profile; `run_onchange_after_darwin-configure-iterm.sh.tmpl` makes it the default.
+- [home/.chezmoiignore](home/.chezmoiignore) skips the macOS-only `Library/` files on other operating systems.
 - Work-only packages are gated by the `work` flag, prompted once on `chezmoi init`.
 
 # Setting up a new machine
@@ -45,7 +46,7 @@ We have a set of tools, languages, and software we often setup by default on our
 
 	The package list installs `MesloLGS NF`, which provides Powerlevel10k's icons:
 
-	- **VS Code:** set `terminal.integrated.fontFamily` to `MesloLGS NF` in User Settings.
+	- **VS Code / Cursor:** chezmoi sets `terminal.integrated.fontFamily` to `MesloLGS NF` in each editor's User Settings through `modify_settings.json` scripts under `home/Library/Application Support/{Code,Cursor}/User/`. Only that key is managed; your other settings are preserved. The scripts require `settings.json` to be strict JSON (no comments).
 	- **iTerm2:** chezmoi installs the `Dotfiles` dynamic profile with `MesloLGS NF` at size 12 and makes it the default automatically. It inherits other settings from the existing `Default` profile. To change the managed font or size, edit the JSON template in this repo and apply with iTerm2 closed.
 
 	Restart the terminal app after installing the font. Existing iTerm2 sessions may retain their previous profile; open a new window with the `Dotfiles` profile if needed. Boxes in the prompt indicate missing font glyphs.

@@ -1,0 +1,8 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* Sets only the keys below; every other setting in the file is preserved. */ -}}
+{{- $settings := dict -}}
+{{- if .chezmoi.stdin -}}
+{{-   $settings = .chezmoi.stdin | fromJson -}}
+{{- end -}}
+{{- $_ := set $settings "terminal.integrated.fontFamily" "MesloLGS NF" -}}
+{{ $settings | toPrettyJson "    " -}}

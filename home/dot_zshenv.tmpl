@@ -1,5 +1,8 @@
-# Homebrew autocomplete
-# https://docs.brew.sh/Shell-Completion
+# Keep PATH/FPATH free of duplicates. `brew shellenv` prepends to FPATH (which is
+# exported) every time it runs, so nested shells grow it, which changes the
+# compinit cache key and forces a slow full rebuild of ~/.zcompdump.
+typeset -U path fpath
+
 export PATH=/usr/local/bin/:$PATH
 
 # Path to your oh-my-zsh installation.

@@ -9,13 +9,10 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 ##################################################
 
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
-fi
+# Homebrew completions: only extend fpath here. oh-my-zsh (sourced below)
+# runs compinit itself; calling it here too doubles the startup cost.
+# https://docs.brew.sh/Shell-Completion
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 ########## User configurations ##########
 
 # zoxide (z / zi)

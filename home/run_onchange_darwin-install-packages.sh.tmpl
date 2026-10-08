@@ -18,7 +18,7 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 {{ if .work -}}
-{{ range .packages.work.taps -}}
+{{ range (index .packages.work "taps") -}}
 tap {{ . | quote }}
 {{ end -}}
 {{ range .packages.work.brews -}}

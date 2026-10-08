@@ -1,7 +1,7 @@
 [tools]
 go = "latest"
 golangci-lint = "latest"
-kubectl = "latest"
 protobuf = "latest"
+python = "latest"
 terraform = "latest"
 yq = "latest"

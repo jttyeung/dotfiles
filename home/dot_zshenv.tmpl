@@ -30,4 +30,7 @@ export KUBECONFIG=$HOME/.kube/config
 
 # Python3
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
+
+# Liquibase
+export LIQUIBASE_HOME="{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}/opt/liquibase/libexec"
 {{- end }}

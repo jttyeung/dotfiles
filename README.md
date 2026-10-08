@@ -46,7 +46,7 @@ We have a set of tools, languages, and software we often setup by default on our
 
 	The package list installs `MesloLGS NF`, which provides Powerlevel10k's icons:
 
-	- **VS Code / Cursor:** chezmoi sets `terminal.integrated.fontFamily` to `MesloLGS NF` in each editor's User Settings through `modify_settings.json` scripts under `home/Library/Application Support/{Code,Cursor}/User/`. Only that key is managed; your other settings are preserved. The scripts require `settings.json` to be strict JSON (no comments).
+	- **VS Code:** chezmoi sets `terminal.integrated.fontFamily` to `MesloLGS NF` in its User Settings through `home/Library/Application Support/Code/User/modify_settings.json`. Only that key is managed; your other settings are preserved. The script requires `settings.json` to be strict JSON (no comments).
 	- **iTerm2:** chezmoi installs the `Dotfiles` dynamic profile with `MesloLGS NF` at size 12 and makes it the default automatically. It inherits other settings from the existing `Default` profile. To change the managed font or size, edit the JSON template in this repo and apply with iTerm2 closed.
 
 	Restart the terminal app after installing the font. Existing iTerm2 sessions may retain their previous profile; open a new window with the `Dotfiles` profile if needed. Boxes in the prompt indicate missing font glyphs.

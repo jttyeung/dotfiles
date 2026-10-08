@@ -1,6 +1,14 @@
 {{- $work := promptBoolOnce . "work" "Is this a work machine" -}}
+{{- $gitlabHost := "" -}}
+{{- $gitlabPort := "" -}}
+{{- if $work -}}
+{{-   $gitlabHost = promptStringOnce . "gitlabHost" "Work GitLab host" -}}
+{{-   $gitlabPort = promptStringOnce . "gitlabPort" "Work GitLab SSH port" -}}
+{{- end -}}
 
 sourceDir = {{ .chezmoi.workingTree | quote }}
 
 [data]
     work = {{ $work }}
+    gitlabHost = {{ $gitlabHost | quote }}
+    gitlabPort = {{ $gitlabPort | quote }}

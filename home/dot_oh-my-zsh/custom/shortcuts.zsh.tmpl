@@ -7,4 +7,35 @@ gclw() {
 nvclw() {
   git clone "ssh://git@{{ .gitlabHost }}:{{ .gitlabPort }}/$1.git" $(go env GOPATH)/src/{{ .gitlabHost }}/"$1" && cd $(go env GOPATH)/src/{{ .gitlabHost }}/"$1"
 }
+
+# Vault env switcher. Env files live untracked in ~/.config/vault/<env>.env
+#   nvcloud              show current env
+#   nvcloud <env>        switch env in this shell
+#   nvcloud login <env>  switch env and OIDC login
+nvcloud() {
+  local dir="${XDG_CONFIG_HOME:-$HOME/.config}/vault"
+  local -a files=("$dir"/*.env(N))
+  local envs="${(j: :)${(@)${(@)files:t}%.env}}"
+  if [[ $# -eq 0 ]]; then
+    if [[ -n $VAULT_ADDR ]]; then
+      echo "vault: $VAULT_ADDR (namespace: ${VAULT_NAMESPACE:-none})"
+    else
+      echo "vault: no env set (available: ${envs:-none})"
+    fi
+    return
+  fi
+  local login=0
+  [[ $1 == login ]] && { login=1; shift }
+  local f="$dir/${1:?usage: nvcloud [login] <env>}.env"
+  [[ -r $f ]] || { echo "no such env: $1 (available: ${envs:-none})"; return 1 }
+  set -a; source "$f"; set +a
+  echo "vault -> $VAULT_ADDR (namespace: $VAULT_NAMESPACE)"
+  if (( login )); then
+    local args=$NVCLOUD_LOGIN_ARGS
+    unset NVCLOUD_LOGIN_ARGS
+    [[ -n $args ]] || { echo "no NVCLOUD_LOGIN_ARGS in $f"; return 1 }
+    vault login ${=args}
+  fi
+}
+compdef '_files -W ~/.config/vault -g "*.env(:r)"' nvcloud 2>/dev/null
 {{- end }}

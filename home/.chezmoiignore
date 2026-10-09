@@ -1,3 +1,7 @@
 {{ if ne .chezmoi.os "darwin" }}
 Library
 {{ end }}
+{{ if not .work }}
+.vault
+.local/bin/vault-token-helper
+{{ end }}

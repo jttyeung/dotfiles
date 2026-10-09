@@ -1,0 +1,15 @@
+#!/bin/sh
+# Vault token helper: keeps one token per VAULT_ADDR/VAULT_NAMESPACE so
+# switching envs (see nvcloud) doesn't clobber the other env's login.
+# Protocol: `get` prints the token, `store` reads it from stdin, `erase` deletes it.
+# Tokens live outside the repo in ~/.config/vault/tokens (mode 600).
+dir="${XDG_CONFIG_HOME:-$HOME/.config}/vault/tokens"
+key=$(printf '%s_%s' "${VAULT_ADDR:-default}" "${VAULT_NAMESPACE:-}" | tr -c 'A-Za-z0-9\n' '_')
+file="$dir/$key"
+
+case "$1" in
+  get)   [ -r "$file" ] && cat "$file" ;;
+  store) umask 077; mkdir -p "$dir" && chmod 700 "$dir" && cat > "$file" ;;
+  erase) rm -f "$file" ;;
+  *)     echo "usage: $0 get|store|erase" >&2; exit 1 ;;
+esac

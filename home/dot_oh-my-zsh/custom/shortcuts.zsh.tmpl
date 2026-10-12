@@ -9,8 +9,8 @@ nvclw() {
 }
 
 # Vault env switcher. Env files (incl. login args) live untracked in ~/.config/vault/<env>.env
-#   nvcloud          show current env
-#   nvcloud <env>    switch env in this shell and log in to vault (skips login if token is still valid)
+#   nvcloud          show current env and whether its vault token is valid
+#   nvcloud <env>    switch env in this shell and log in to vault (re-run to re-auth when the token expires)
 nvcloud() {
   local dir="${XDG_CONFIG_HOME:-$HOME/.config}/vault"
   local -a files=("$dir"/*.env(N))
@@ -18,6 +18,12 @@ nvcloud() {
   if [[ $# -eq 0 ]]; then
     if [[ -n $NVCLOUD_ENV ]]; then
       echo "vault env: $NVCLOUD_ENV -> $VAULT_ADDR (namespace: ${VAULT_NAMESPACE:-none})"
+      if vault token lookup >/dev/null 2>&1; then
+        echo "vault token: valid"
+      else
+        echo "vault token: expired or missing (run: nvcloud $NVCLOUD_ENV)"
+        return 1
+      fi
     else
       echo "vault: no env set (available: ${envs:-none})"
     fi
@@ -30,10 +36,6 @@ nvcloud() {
   unset NVCLOUD_LOGIN_ARGS
   export NVCLOUD_ENV=$1
   echo "vault env: $NVCLOUD_ENV -> $VAULT_ADDR (namespace: ${VAULT_NAMESPACE:-none})"
-  if vault token lookup >/dev/null 2>&1; then
-    echo "vault: existing token still valid"
-    return
-  fi
   [[ -n $args ]] || { echo "no NVCLOUD_LOGIN_ARGS in $f"; return 1 }
   vault login ${=args} && echo "logged in to vault env: $NVCLOUD_ENV"
 }

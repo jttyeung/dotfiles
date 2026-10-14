@@ -1,0 +1,30 @@
+#!/bin/bash
+# Merges our managed keys into ~/.claude/settings.json instead of replacing it,
+# so Claude Code can keep writing its own settings (model, theme, ...) there.
+# Current contents arrive on stdin (empty on a fresh machine); the new contents
+# go to stdout.
+#
+# Managed keys:
+#   includeCoAuthoredBy = false  -> no "Co-Authored-By: Claude" trailer or
+#                                   "Generated with Claude Code" PR byline.
+
+set -eufo pipefail
+
+existing=$(</dev/stdin)
+
+if ! command -v jq >/dev/null 2>&1; then
+    # jq arrives with the Homebrew bundle, which runs later in the first
+    # `chezmoi apply` on a new machine. Seed the file if it is missing,
+    # otherwise leave it alone and let the next apply merge properly.
+    if [ -z "${existing//[[:space:]]/}" ]; then
+        printf '{\n  "includeCoAuthoredBy": false\n}\n'
+    else
+        printf '%s' "$existing"
+        echo "jq not found; leaving ~/.claude/settings.json unchanged" >&2
+    fi
+    exit 0
+fi
+
+[ -n "${existing//[[:space:]]/}" ] || existing='{}'
+
+printf '%s' "$existing" | jq --indent 2 '.includeCoAuthoredBy = false'

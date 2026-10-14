@@ -10,6 +10,7 @@ We have a set of tools, languages, and software we often setup by default on our
 - [home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl](<home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl>) defines the macOS iTerm2 `Dotfiles` profile; `run_onchange_after_darwin-configure-iterm.sh.tmpl` makes it the default.
 - [home/.chezmoiignore](home/.chezmoiignore) skips the macOS-only `Library/` files on other operating systems.
 - Work-only packages are gated by the `work` flag, prompted once on `chezmoi init`.
+- [home/private_dot_claude/modify_settings.json](home/private_dot_claude/modify_settings.json) is a chezmoi `modify_` script: it merges our keys (currently `includeCoAuthoredBy: false`, which drops the `Co-Authored-By: Claude` trailer) into `~/.claude/settings.json` on every apply, leaving the settings Claude Code writes itself untouched.
 
 # Setting up a new machine
 1. Install [Homebrew](https://brew.sh/)

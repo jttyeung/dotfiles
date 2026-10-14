@@ -17,11 +17,13 @@ brews = [
     "zsh-syntax-highlighting",
 ]
 casks = [
+    "caffeine",
     "claude-code",
     "dropbox",
     "font-meslo-for-powerlevel10k",
     "iterm2",
     "spotify",
+    "tailscale",
     "visual-studio-code",
 ]
 

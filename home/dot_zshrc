@@ -63,3 +63,39 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# git worktrees with tmux sessions
+# usage: wf <branch> [claude|codex]
+wf() {
+  local branch=$1 agent=$2
+  if [[ -z $branch || -z $agent ]]; then
+    echo "usage: wf <branch> <claude|codex|shell>" >&2
+    return 1
+  fi
+  case $agent in
+    claude|codex|shell) ;;
+    *) echo "wf: unknown agent '$agent' (use claude, codex, or shell)" >&2
+       return 1 ;;
+  esac
+
+  local repo=$(basename "$(git rev-parse --show-toplevel)")
+  local safe=${branch//\//-}
+  local dir="../${repo}-${safe}"
+
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    [[ -d $dir ]] || git worktree add "$dir" "$branch" || return 1
+  else
+    git worktree add "$dir" -b "$branch" origin/main || return 1
+  fi
+
+  if ! tmux has-session -t "$safe" 2>/dev/null; then
+    tmux new-session -d -s "$safe" -c "$dir"
+    [[ $agent == shell ]] || tmux send-keys -t "$safe" "$agent" C-m
+  fi
+
+  if [[ -n $TMUX ]]; then
+    tmux switch-client -t "$safe"
+  else
+    tmux attach -t "$safe"
+  fi
+}

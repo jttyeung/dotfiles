@@ -23,7 +23,7 @@ casks = [
     "font-meslo-for-powerlevel10k",
     "iterm2",
     "spotify",
-    "tailscale",
+    "tailscale-app",
     "visual-studio-code",
 ]
 

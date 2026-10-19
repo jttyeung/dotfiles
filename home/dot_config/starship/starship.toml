@@ -10,6 +10,10 @@ vicmd_symbol = "[N] >>>"
 success_symbol = '[❯](bold green)'
 error_symbol = '[❯](bold red)'
 
+[directory]
+truncation_length = 2
+truncate_to_repo = false
+
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
 

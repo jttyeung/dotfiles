@@ -11,7 +11,7 @@ brews = [
     "just",
     "lsd",
     "mise",
-    "powerlevel10k",
+    "starship",
     "tmux",
     "zoxide",
     "zsh-completions",

@@ -1,0 +1,11 @@
+font-family = Hack Nerd Font Mono
+font-size = 14
+
+theme = Catppuccin Mocha
+
+background-opacity = 0.88
+background-blur-radius = 20
+
+macos-option-as-alt = true
+window-padding-x = 8
+window-padding-y = 4

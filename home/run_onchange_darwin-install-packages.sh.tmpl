@@ -27,5 +27,12 @@ brew {{ . | quote }}
 {{ range .packages.work.casks -}}
 cask {{ . | quote }}
 {{ end -}}
+{{ else -}}
+{{ range .packages.personal.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.personal.casks -}}
+cask {{ . | quote }}
+{{ end -}}
 {{ end -}}
 EOF

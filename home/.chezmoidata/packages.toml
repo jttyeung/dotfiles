@@ -26,7 +26,6 @@ casks = [
     "font-meslo-for-powerlevel10k",
     "iterm2",
     "spotify",
-    "tailscale-app",
     "visual-studio-code",
 ]
 
@@ -40,4 +39,11 @@ brews = [
 casks = [
     "docker-desktop",
     "postman",
+]
+
+# Only installed when the "work" flag is false (see .chezmoi.toml.tmpl).
+[packages.personal]
+brews = []
+casks = [
+    "tailscale-app",
 ]

@@ -10,4 +10,5 @@ macos-option-as-alt = true
 window-padding-x = 8
 window-padding-y = 4
 mouse-hide-while-typing = true
-window-decoration = false
+window-decoration = true
+macos-titlebar-style = transparent

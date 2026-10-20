@@ -6,3 +6,8 @@ python = "latest"
 rust = "latest"
 terraform = "latest"
 yq = "latest"
+
+[env]
+# mise points GOBIN at the per-version Go install dir, which strands go-installed
+# tools (swag, air, ...) on every Go upgrade. Keep them in the stable GOPATH/bin.
+GOBIN = "{{env.HOME}}/go/bin"

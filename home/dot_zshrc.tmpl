@@ -51,6 +51,14 @@ export ZSH="$HOME/.oh-my-zsh"
 source "$ZSH/oh-my-zsh.sh"
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+{{ if .work -}}
+# kubeswitch must run as a shell function so it can update this pane's KUBECONFIG.
+if command -v switcher >/dev/null 2>&1; then
+  source <(switcher init zsh)
+  source <(switch completion zsh)
+fi
+{{ end }}
+
 # Starship prompt (config: ~/.config/starship/starship.toml)
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"

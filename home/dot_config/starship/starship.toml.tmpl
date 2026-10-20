@@ -17,6 +17,20 @@ truncate_to_repo = false
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
 
+{{ if .work -}}
+[kubernetes]
+disabled = false
+format = '[$symbol$context( / $namespace)]($style) '
+
+[[kubernetes.contexts]]
+context_pattern = '(.*[._-])?(stg|staging)[._-].*'
+style = 'bold yellow'
+
+[[kubernetes.contexts]]
+context_pattern = '(.*[._-])?(prd|prod|production)[._-].*'
+style = 'bold red'
+{{ end }}
+
 [golang]
 format = '[ ](bold cyan)'
 

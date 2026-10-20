@@ -25,8 +25,8 @@ export PATH=$PATH:$HOME/.gem/bin
 # Kubernetes kubectl plugins with krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# kubeconfig
-export KUBECONFIG=$HOME/.kube/config
+# Keep kubeswitch's selection when entering a nested shell.
+export KUBECONFIG="${KUBECONFIG:-$HOME/.kube/config}"
 
 # Python3
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"

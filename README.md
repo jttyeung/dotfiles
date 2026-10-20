@@ -44,11 +44,7 @@ We have a set of tools, languages, and software we often setup by default on our
 
 1. Select the prompt font
 
-	The package list installs `MesloLGS NF`, which provides Powerlevel10k's icons:
-
-	- **VS Code:** chezmoi sets `terminal.integrated.fontFamily` to `MesloLGS NF` in its User Settings through `home/Library/Application Support/Code/User/modify_settings.json`. Only that key is managed; your other settings are preserved. The script requires `settings.json` to be strict JSON (no comments).
-
-	Restart the terminal app after installing the font. Boxes in the prompt indicate missing font glyphs.
+	The package list installs `Hack Nerd Font`, which provides the Starship prompt's icons. Ghostty is already configured to use it; set it as the font in any other terminal. Boxes in the prompt indicate missing font glyphs.
 
 # Day-to-day
 ```sh

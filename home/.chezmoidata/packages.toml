@@ -23,7 +23,6 @@ casks = [
     "dropbox",
     "font-hack-nerd-font",
     "ghostty",
-    "font-meslo-for-powerlevel10k",
     "spotify",
     "visual-studio-code",
 ]

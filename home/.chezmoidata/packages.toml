@@ -32,6 +32,7 @@ casks = [
 # Only installed when the "work" flag is true (see .chezmoi.toml.tmpl).
 [packages.work]
 brews = [
+    "codex",
     "gitleaks",
     "glab",
     "liquibase",

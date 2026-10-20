@@ -24,7 +24,6 @@ casks = [
     "font-hack-nerd-font",
     "ghostty",
     "font-meslo-for-powerlevel10k",
-    "iterm2",
     "spotify",
     "visual-studio-code",
 ]

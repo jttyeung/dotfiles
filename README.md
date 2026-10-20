@@ -7,7 +7,6 @@ We have a set of tools, languages, and software we often setup by default on our
 - [home/.chezmoiexternal.toml](home/.chezmoiexternal.toml) installs Oh My Zsh into `~/.oh-my-zsh`, alongside the custom aliases and shortcuts. Starship supplies the prompt, with Git branch on the right and Kubernetes context/namespace on work machines.
 - [home/.chezmoidata/packages.toml](home/.chezmoidata/packages.toml) lists Homebrew formulae/casks. `run_onchange_darwin-install-packages.sh.tmpl` runs `brew bundle` against it whenever the list changes.
 - [home/dot_config/mise/config.toml](home/dot_config/mise/config.toml) is the global mise tool list; `run_onchange_after_mise-install.sh.tmpl` reruns `mise install` when it changes.
-- [home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl](<home/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json.tmpl>) defines the macOS iTerm2 `Dotfiles` profile; `run_onchange_after_darwin-configure-iterm.sh.tmpl` makes it the default.
 - [home/.chezmoiignore](home/.chezmoiignore) skips the macOS-only `Library/` files on other operating systems.
 - Work-only packages are gated by the `work` flag, prompted once on `chezmoi init`.
 - [home/private_dot_claude/modify_settings.json](home/private_dot_claude/modify_settings.json) is a chezmoi `modify_` script: it merges our keys (currently `includeCoAuthoredBy: false`, which drops the `Co-Authored-By: Claude` trailer) into `~/.claude/settings.json` on every apply, leaving the settings Claude Code writes itself untouched.
@@ -41,16 +40,15 @@ We have a set of tools, languages, and software we often setup by default on our
 	chezmoi apply
 	```
 
-	Quit iTerm2 before applying, and run the commands from VS Code's terminal or macOS Terminal. This also downloads Oh My Zsh and sets iTerm2's default profile; no separate installer is needed. Reopen iTerm2 after applying.
+	This also downloads Oh My Zsh; no separate installer is needed.
 
 1. Select the prompt font
 
 	The package list installs `MesloLGS NF`, which provides Powerlevel10k's icons:
 
 	- **VS Code:** chezmoi sets `terminal.integrated.fontFamily` to `MesloLGS NF` in its User Settings through `home/Library/Application Support/Code/User/modify_settings.json`. Only that key is managed; your other settings are preserved. The script requires `settings.json` to be strict JSON (no comments).
-	- **iTerm2:** chezmoi installs the `Dotfiles` dynamic profile with `MesloLGS NF` at size 12 and makes it the default automatically. It inherits other settings from the existing `Default` profile. To change the managed font or size, edit the JSON template in this repo and apply with iTerm2 closed.
 
-	Restart the terminal app after installing the font. Existing iTerm2 sessions may retain their previous profile; open a new window with the `Dotfiles` profile if needed. Boxes in the prompt indicate missing font glyphs.
+	Restart the terminal app after installing the font. Boxes in the prompt indicate missing font glyphs.
 
 # Day-to-day
 ```sh

@@ -44,7 +44,7 @@ We have a set of tools, languages, and software we often setup by default on our
 
 1. Select the prompt font
 
-	The package list installs `Hack Nerd Font`, which provides the Starship prompt's icons. Ghostty is already configured to use it; set it as the font in any other terminal. Boxes in the prompt indicate missing font glyphs.
+	The package list installs `Hack Nerd Font`, which provides the Starship prompt's icons. Ghostty is already configured to use it, and chezmoi mirrors the Ghostty font, size, Option-as-Meta and Catppuccin Mocha theme into VS Code's User settings through `home/Library/Application Support/Code/User/modify_settings.json` (only those keys are managed; the file must be strict JSON). The Catppuccin extension is installed by `run_onchange_after_darwin-vscode-extensions.sh`. Set the font by hand in any other terminal. Boxes in the prompt indicate missing font glyphs.
 
 # Day-to-day
 ```sh

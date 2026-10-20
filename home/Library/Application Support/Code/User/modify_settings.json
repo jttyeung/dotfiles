@@ -1,0 +1,38 @@
+#!/bin/bash
+# Merges our managed keys into VS Code's User settings.json instead of
+# replacing it, so settings VS Code writes itself are preserved. Current
+# contents arrive on stdin (empty on a fresh machine); the new contents go to
+# stdout. Requires strict JSON (no comments); otherwise the file is left alone.
+#
+# Mirrors dot_config/ghostty/config:
+#   font-family / font-size   -> terminal.integrated.fontFamily / fontSize
+#   macos-option-as-alt       -> terminal.integrated.macOptionIsMeta
+#   theme                     -> workbench.colorTheme (the extension is
+#                                installed by run_onchange_after_darwin-vscode-extensions.sh)
+
+set -eufo pipefail
+
+existing=$(</dev/stdin)
+
+if ! command -v jq >/dev/null 2>&1; then
+    # jq arrives with the Homebrew bundle, which runs later in the first
+    # `chezmoi apply` on a new machine; leave the file for the next apply.
+    printf '%s' "$existing"
+    echo "jq not found; leaving VS Code settings.json unchanged" >&2
+    exit 0
+fi
+
+[ -n "${existing//[[:space:]]/}" ] || existing='{}'
+
+if ! merged=$(printf '%s' "$existing" | jq --indent 4 '
+    .["terminal.integrated.fontFamily"] = "Hack Nerd Font Mono"
+    | .["terminal.integrated.fontSize"] = 14
+    | .["terminal.integrated.macOptionIsMeta"] = true
+    | .["workbench.colorTheme"] = "Catppuccin Mocha"
+' 2>/dev/null); then
+    printf '%s' "$existing"
+    echo "VS Code settings.json is not strict JSON; leaving it unchanged" >&2
+    exit 0
+fi
+
+printf '%s\n' "$merged"

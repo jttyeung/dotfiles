@@ -30,6 +30,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 if command -v switcher >/dev/null 2>&1; then
   source <(switcher init zsh)
   source <(switch completion zsh)
+  alias kubeswitch=switch
 fi
 {{ end }}
 

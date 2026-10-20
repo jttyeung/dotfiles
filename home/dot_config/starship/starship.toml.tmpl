@@ -22,6 +22,12 @@ format = '[$symbol$branch(:$remote_branch)]($style) '
 disabled = false
 format = '[$symbol$context( / $namespace)]($style) '
 
+# Private aliases take precedence over the generic environment colors below.
+{{ $contextAliases := joinPath .chezmoi.homeDir ".config" "starship" "kubernetes-contexts.toml" -}}
+{{ if stat $contextAliases -}}
+{{ include $contextAliases }}
+{{ end -}}
+
 [[kubernetes.contexts]]
 context_pattern = '(.*[._-])?(stg|staging)[._-].*'
 style = 'bold yellow'

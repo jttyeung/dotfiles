@@ -59,10 +59,13 @@ Unlike the old bork setup, files in `$HOME` are real files, not symlinks — edi
 # Kubernetes contexts with Teleport
 
 The chezmoi `work` flag gates [kubeswitch](https://github.com/danielfoehrKn/kubeswitch)
-installation, its zsh integration and completions, and Starship's Kubernetes
-context/namespace display. Personal profiles omit this setup.
+installation, its zsh integration, completions and aliases, the `k` alias,
+Kubernetes environment variables, and Starship's Kubernetes context/namespace
+display and private alias file inclusion. Personal profiles omit this setup,
+even if the local private alias file exists.
 On work machines, zsh loads the integration when the binary is available.
-After applying the dotfiles, open a new shell and use:
+After applying the dotfiles, open a new shell (or run `exec zsh` in an existing
+Ghostty tab) and use:
 
 ```sh
 switch                       # fuzzy-select a Kubernetes context
@@ -70,12 +73,38 @@ switch namespace             # select a namespace
 switch history               # select a previous context/namespace
 ```
 
+`kubeswitch` is an alias for `switch`. The installed binary is named `switcher`;
+use the shell commands above so selections update the current shell's `KUBECONFIG`.
+
 Each selection uses a temporary kubeconfig for that shell, so switching in one
 tmux pane does not change another pane's existing selection. Starship reads that
 shell's `KUBECONFIG` and displays the context and namespace on the right, using
 yellow for context names containing a `stg`/`staging` segment and red for
 `prd`/`prod`/`production` (separated by dots, underscores, or hyphens). A nested shell
 inherits its parent's kubeconfig; run `switch` in it to select independently.
+
+To shorten long Teleport context names, put private Starship aliases in
+`~/.config/starship/kubernetes-contexts.toml`, outside this repository. For example
+(replace the example pattern with your actual context naming scheme):
+
+```toml
+[[kubernetes.contexts]]
+context_pattern = 'teleport-stg\.example\.com-(?P<cluster>.+)'
+context_alias = 'stg / $cluster'
+style = 'bold yellow'
+
+[[kubernetes.contexts]]
+context_pattern = 'teleport-prd\.example\.com-(?P<cluster>.+)'
+context_alias = 'prd / $cluster'
+style = 'bold red'
+```
+
+Run `chezmoi apply ~/.config/starship/starship.toml` after changing that file.
+The template includes these aliases before the generic color rules, so a context
+can display as `stg / cluster-a / default`. Aliases change only the prompt;
+`switch` and Teleport keep using the original context names. Starship's
+[Kubernetes context aliases](https://starship.rs/config/#kubernetes) support regex
+capture groups such as `$cluster`. Keep this local file out of chezmoi's source.
 
 Teleport still handles authentication. Populate or refresh the source kubeconfig
 explicitly, since `switch` changes `KUBECONFIG` to a temporary copy:

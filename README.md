@@ -9,7 +9,7 @@ We have a set of tools, languages, and software we often setup by default on our
 - [home/dot_config/mise/config.toml](home/dot_config/mise/config.toml) is the global mise tool list; `run_onchange_after_mise-install.sh.tmpl` reruns `mise install` when it changes.
 - [home/.chezmoiignore](home/.chezmoiignore) skips the macOS-only `Library/` files on other operating systems.
 - Work-only packages are gated by the `work` flag, prompted once on `chezmoi init`.
-- [home/private_dot_claude/modify_settings.json](home/private_dot_claude/modify_settings.json) is a chezmoi `modify_` script: it merges our keys (currently `includeCoAuthoredBy: false`, which drops the `Co-Authored-By: Claude` trailer) into `~/.claude/settings.json` on every apply, leaving the settings Claude Code writes itself untouched.
+- [home/private_dot_claude/modify_settings.json](home/private_dot_claude/modify_settings.json) is a chezmoi `modify_` script: it merges our keys (currently `includeCoAuthoredBy: false` and empty `attribution.commit`/`attribution.pr`, which drop the `Co-Authored-By: Claude` trailer and `Claude-Session:` link) into `~/.claude/settings.json` on every apply, leaving the settings Claude Code writes itself untouched.
 
 # Setting up a new machine
 1. Install [Homebrew](https://brew.sh/)

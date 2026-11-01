@@ -7,6 +7,8 @@
 # Managed keys:
 #   includeCoAuthoredBy = false  -> no "Co-Authored-By: Claude" trailer or
 #                                   "Generated with Claude Code" PR byline.
+#   attribution.commit/pr = ""   -> no "Claude-Session:" link or other
+#                                   attribution in commits or PR bodies.
 
 set -eufo pipefail
 
@@ -17,7 +19,7 @@ if ! command -v jq >/dev/null 2>&1; then
     # `chezmoi apply` on a new machine. Seed the file if it is missing,
     # otherwise leave it alone and let the next apply merge properly.
     if [ -z "${existing//[[:space:]]/}" ]; then
-        printf '{\n  "includeCoAuthoredBy": false\n}\n'
+        printf '{\n  "includeCoAuthoredBy": false,\n  "attribution": {\n    "commit": "",\n    "pr": ""\n  }\n}\n'
     else
         printf '%s' "$existing"
         echo "jq not found; leaving ~/.claude/settings.json unchanged" >&2
@@ -27,4 +29,4 @@ fi
 
 [ -n "${existing//[[:space:]]/}" ] || existing='{}'
 
-printf '%s' "$existing" | jq --indent 2 '.includeCoAuthoredBy = false'
+printf '%s' "$existing" | jq --indent 2 '.includeCoAuthoredBy = false | .attribution.commit = "" | .attribution.pr = ""'

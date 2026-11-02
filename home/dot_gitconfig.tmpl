@@ -14,3 +14,9 @@
 	helper = osxkeychain
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
+{{ if .work -}}
+# Work identity is configured locally, outside the dotfiles repository.
+[include]
+  path = ~/.config/git/work.local
+{{ end -}}

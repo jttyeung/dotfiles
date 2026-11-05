@@ -33,6 +33,21 @@ We have a set of tools, languages, and software we often setup by default on our
 
 	You'll be asked once whether this is a work machine.
 
+1. Create the local git identity
+
+	Git name and email are kept out of this repo. Create `~/.config/git/identity.local` by hand (chezmoi never touches it):
+
+	```sh
+	mkdir -p ~/.config/git
+	cat > ~/.config/git/identity.local <<'EOF'
+	[user]
+	  name = Your Name
+	  email = you@example.com
+	EOF
+	```
+
+	On work machines, also create `~/.config/git/work.local` with the work `[user] email` and any work-only settings such as `[core] sshCommand`; it is included last, so it overrides the identity above. Both files live outside the repo, so there is nothing to gitignore. Without `identity.local`, commits fail with an "empty ident name" error.
+
 1. Preview, then apply
 
 	```sh

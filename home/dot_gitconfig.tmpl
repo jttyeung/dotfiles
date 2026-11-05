@@ -3,9 +3,9 @@
   excludesfile = ~/.gitignore_global
   hooksPath = ~/.config/git/hooks
 
-[user]
-  name = Joanne Yeung
-  email = jttyeung@gmail.com
+# Identity (name, email) lives in ~/.config/git/identity.local, outside the dotfiles repository.
+[include]
+  path = ~/.config/git/identity.local
 [pull]
 	ff = only
 [init]

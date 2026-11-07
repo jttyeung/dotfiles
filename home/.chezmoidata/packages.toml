@@ -20,7 +20,6 @@ brews = [
 casks = [
     "caffeine",
     "claude-code",
-    "dropbox",
     "font-hack-nerd-font",
     "ghostty",
     "spotify",
@@ -46,5 +45,6 @@ casks = [
 [packages.personal]
 brews = []
 casks = [
+    "dropbox",
     "tailscale-app",
 ]

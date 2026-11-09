@@ -32,6 +32,9 @@ if command -v switcher >/dev/null 2>&1; then
   source <(switch completion zsh)
   alias kubeswitch=switch
 fi
+{{ else -}}
+# libpq is keg-only; put its client tools (psql, pg_dump) on PATH.
+export PATH="$(brew --prefix libpq)/bin:$PATH"
 {{ end }}
 
 # Starship prompt (config: ~/.config/starship/starship.toml)

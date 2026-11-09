@@ -43,7 +43,9 @@ casks = [
 
 # Only installed when the "work" flag is false (see .chezmoi.toml.tmpl).
 [packages.personal]
-brews = []
+brews = [
+    "libpq",
+]
 casks = [
     "dropbox",
     "tailscale-app",

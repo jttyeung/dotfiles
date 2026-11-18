@@ -6,12 +6,30 @@
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 ########## User configurations ##########
 
+# Every process spawn is slow here (endpoint security scans each exec), so
+# `eval "$(tool init zsh)"` is expensive. Cache each tool's init output and
+# only regenerate it when the tool's binary is newer than the cache.
+# usage: _cached_source <name> <binary> <command...>
+_cached_source() {
+  local name=$1 bin=$(whence -p "$2") dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+  shift 2
+  [[ -n $bin ]] || return 1
+  local cache="$dir/init-$name.zsh"
+  if [[ ! -s $cache || $bin -nt $cache ]]; then
+    mkdir -p "$dir" && "$@" >| "$cache" || { rm -f "$cache"; return 1 }
+  fi
+  source "$cache"
+}
+
 # zoxide (z / zi)
-eval "$(zoxide init zsh)"
+_cached_source zoxide zoxide zoxide init zsh
 
 ########## ZSH Default configurations ##########
 
 ZSH_DISABLE_COMPFIX=true
+
+# Don't let oh-my-zsh check for updates at startup; update it by hand.
+zstyle ':omz:update' mode disabled
 
 # Prompt is provided by starship (initialised at the bottom).
 ZSH_THEME=""
@@ -27,9 +45,10 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 {{ if .work -}}
 # kubeswitch must run as a shell function so it can update this pane's KUBECONFIG.
-if command -v switcher >/dev/null 2>&1; then
-  source <(switcher init zsh)
-  source <(switch completion zsh)
+if (( $+commands[switcher] )); then
+  _cached_source switcher switcher switcher init zsh
+  # `switch` only exists once the init script above has been sourced.
+  _cached_source switch-completion switcher switch completion zsh
   alias kubeswitch=switch
 fi
 {{ else -}}
@@ -39,7 +58,7 @@ export PATH="$(brew --prefix libpq)/bin:$PATH"
 
 # Starship prompt (config: ~/.config/starship/starship.toml)
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init zsh)"
+_cached_source starship starship starship init zsh
 
 # git worktrees with tmux sessions
 # usage: wf <branch> [claude|codex]
@@ -76,3 +95,6 @@ wf() {
     tmux attach -t "$safe"
   fi
 }
+
+# User-installed CLIs live here
+export PATH="$HOME/.local/bin:$PATH"

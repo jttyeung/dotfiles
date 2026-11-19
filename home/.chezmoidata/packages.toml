@@ -33,6 +33,7 @@ brews = [
     "danielfoehrkn/switch/switch",
     "gitleaks",
     "glab",
+    "kubectx",
     "liquibase",
 ]
 casks = [

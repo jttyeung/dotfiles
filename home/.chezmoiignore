@@ -5,3 +5,9 @@ Library
 .vault
 .local/bin/vault-token-helper
 {{ end }}
+{{ if .work }}
+.claude/CLAUDE.md
+.claude/skills/open-source-hygiene
+.config/git/hooks/commit-msg
+.config/git/hooks/privacy-lib.sh
+{{ end }}

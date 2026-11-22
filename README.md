@@ -10,6 +10,9 @@ We have a set of tools, languages, and software we often setup by default on our
 - [home/.chezmoiignore](home/.chezmoiignore) skips the macOS-only `Library/` files on other operating systems.
 - Work-only packages are gated by the `work` flag, prompted once on `chezmoi init`.
 - [home/private_dot_claude/modify_settings.json](home/private_dot_claude/modify_settings.json) is a chezmoi `modify_` script: it merges our keys (currently `includeCoAuthoredBy: false` and empty `attribution.commit`/`attribution.pr`, which drop the `Co-Authored-By: Claude` trailer and `Claude-Session:` link) into `~/.claude/settings.json` on every apply, leaving the settings Claude Code writes itself untouched.
+- [home/dot_config/git/hooks/](home/dot_config/git/hooks/) is the global `core.hooksPath`. `pre-commit` runs gitleaks everywhere. On personal (non-work) machines only, chezmoi also installs `privacy-lib.sh` and `commit-msg`, which treat every repo as public. They block Claude as author, committer or co-author; Claude session links; Claude-local files, `.env` files and keys; and added lines containing your git email, your absolute `$HOME` path, or any string listed in `~/.config/git/private-patterns.local` (a file outside the repo, one string per line).
+- [home/private_dot_claude/skills/open-source-hygiene/](home/private_dot_claude/skills/open-source-hygiene/SKILL.md) is a global Claude Code skill (personal machines only) with the same rules, so Claude follows them before the hooks have to catch anything.
+- [home/private_dot_claude/CLAUDE.md](home/private_dot_claude/CLAUDE.md) is the global `~/.claude/CLAUDE.md` (personal machines only). It loads in every session and points Claude at that skill, so the rules apply even when the skill isn't triggered.
 
 # Setting up a new machine
 1. Install [Homebrew](https://brew.sh/)

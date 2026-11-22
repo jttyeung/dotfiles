@@ -1,9 +1,58 @@
 #!/bin/sh
 # Global pre-commit hook, wired up via core.hooksPath in ~/.gitconfig.
 # Applies to every repo automatically -- no per-repo setup needed.
+# On personal machines it also treats every repo as public: blocks personal
+# info, Claude chat/session data, and Claude as an author. Those checks live in
+# privacy-lib.sh, which chezmoi installs only on non-work machines.
 
 if command -v gitleaks >/dev/null 2>&1; then
   gitleaks protect --staged --redact -v || exit 1
+fi
+
+privacy_lib="$(dirname "$0")/privacy-lib.sh"
+if [ -f "$privacy_lib" ]; then
+. "$privacy_lib"
+fail=0
+
+# 1. Claude (or Anthropic) must never be the author or committer.
+for ident in "$(git var GIT_AUTHOR_IDENT)" "$(git var GIT_COMMITTER_IDENT)"; do
+  if printf '%s' "$ident" | grep -qiE 'claude|anthropic'; then
+    echo "pre-commit: author/committer looks like Claude: $ident" >&2
+    fail=1
+  fi
+done
+
+# 2. Files that should never be committed: Claude local/chat data, env files, keys.
+blocked_paths=$(git diff --cached --name-only --diff-filter=ACR | grep -E \
+  -e '(^|/)\.claude/(projects|sessions|session-env|shell-snapshots|file-history|paste-cache|todos|statsig|plugins|history\.jsonl|settings\.local\.json|\.credentials)' \
+  -e '(^|/)CLAUDE\.local\.md$' \
+  -e '(^|/)\.env(\.[^/]*)?$' \
+  -e '\.(pem|key|p12|pfx|keychain|kdbx)$' \
+  -e '(^|/)id_(rsa|dsa|ecdsa|ed25519)$' \
+  -e '(^|/)\.(netrc|pgpass)$' \
+  | grep -vE '\.env\.(example|sample|template)$')
+if [ -n "$blocked_paths" ]; then
+  echo "pre-commit: refusing to commit private/local files:" >&2
+  printf '  %s\n' $blocked_paths >&2
+  fail=1
+fi
+
+# 3. Added lines containing personal info or Claude session links.
+#    Prefix each added line with its file so hits are traceable.
+added=$(git diff --cached -U0 --no-color --diff-filter=ACMR | awk '
+  /^\+\+\+ b\// { file = substr($0, 7); next }
+  /^\+/ && !/^\+\+\+/ { print file ": " substr($0, 2) }
+')
+if [ -n "$added" ] && hits=$(printf '%s\n' "$added" | privacy_scan); then
+  echo "pre-commit: staged changes contain personal or Claude-session data:" >&2
+  printf '%s\n' "$hits" | cut -d: -f2- | cut -c1-200 | sed 's/^/  /' >&2
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo "pre-commit: fix the above (or, if a human has verified it is safe, commit with --no-verify)." >&2
+  exit 1
+fi
 fi
 
 # core.hooksPath overrides git's normal .git/hooks lookup, so a repo's own

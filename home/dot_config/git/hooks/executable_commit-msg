@@ -1,0 +1,34 @@
+#!/bin/sh
+# Global commit-msg hook, wired up via core.hooksPath in ~/.gitconfig.
+# Rejects Claude attribution trailers and personal / Claude-session data
+# in commit messages.
+
+. "$(dirname "$0")/privacy-lib.sh"
+
+msg_file="$1"
+# Ignore git's commented template lines (and any verbose diff below them).
+msg=$(sed -e '/^# ------------------------ >8 ------------------------$/,$d' -e '/^#/d' "$msg_file")
+fail=0
+
+attribution=$(printf '%s\n' "$msg" | grep -inE \
+  -e '^co-authored-by:.*(claude|anthropic)' \
+  -e 'generated (with|by) .*claude' \
+  -e '^(signed-off-by|assisted-by|ai-assisted-by|helped-by):.*(claude|anthropic)')
+if [ -n "$attribution" ]; then
+  echo "commit-msg: remove Claude attribution from the message:" >&2
+  printf '  %s\n' "$attribution" >&2
+  fail=1
+fi
+
+if hits=$(printf '%s\n' "$msg" | privacy_scan); then
+  echo "commit-msg: message contains personal or Claude-session data:" >&2
+  printf '  %s\n' "$hits" >&2
+  fail=1
+fi
+
+[ "$fail" -eq 0 ] || exit 1
+
+local_hook="$(git rev-parse --git-dir)/hooks/commit-msg"
+if [ -x "$local_hook" ]; then
+  exec "$local_hook" "$@"
+fi
